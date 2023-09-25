@@ -1,6 +1,6 @@
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -25,9 +25,9 @@ public class shop {
         }
         System.out.println("новая коллекция:" + list);
         Random rand = new Random();
-
-
-        try (FileWriter fileWriter = new FileWriter(new File("log.txt"), true)) {
+        File file= new File("testFile");
+        try  {
+            PrintWriter pw = new PrintWriter(file);
 
             for (int i = 0; i < 10; i++) {
                 int count = 0;
@@ -36,8 +36,9 @@ public class shop {
                 for (toy toy : list) {
                     if ((toy != null) && (r <= toy.losRate)) {
                         int idT = toy.getId();
-                        String newIdYoy = String.valueOf(idT);
-                        fileWriter.write(newIdYoy);
+                        int losRate = toy.getLosRate();
+                        String newIdYoy = String.valueOf(idT) + " " + String.valueOf(losRate);
+                        pw.println(newIdYoy);
                         System.out.println("id игрушки:" + idT);
                         break;
                 }
@@ -45,8 +46,9 @@ public class shop {
                         count+=1;
                         if (count>list.size()-1) {
                             int idT = toy.getId();
-                            String newIdYoy = String.valueOf(idT);
-                            fileWriter.write(newIdYoy);
+                            int losRate = toy.getLosRate();
+                            String newIdYoy = String.valueOf(idT) + " " + String.valueOf(losRate);
+                            pw.println(newIdYoy);
                             System.out.println("id игрушки:" + idT);
 
                         }
@@ -54,6 +56,7 @@ public class shop {
                     }
                 }
             }
+            pw.close();
 
         } catch (IOException e) {
             System.out.println("Возникла ошибка , проверьте данные.");
@@ -73,6 +76,8 @@ public class shop {
             toy t1 = new toy(i, l, n);
             System.out.println(t1.toString());
             return t1;
+            
         }
+        
   
 }
