@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class shop {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("введите количество  грушек, которое хотите добавить(не менее 3-х): ");
+        System.out.println("введите количество  игрушек, которое хотите добавить(не менее 3-х): ");
         int countJoy = scanner.nextInt();
         PriorityQueue<toy> ttt = new PriorityQueue<>(Comparator.comparingInt(toy::getLosRate));
 
@@ -57,6 +57,7 @@ public class shop {
                 }
             }
             pw.close();
+            scanner.close(); 
 
         } catch (IOException e) {
             System.out.println("Возникла ошибка , проверьте данные.");
@@ -75,6 +76,7 @@ public class shop {
             Integer i = scanner.nextInt();
             toy t1 = new toy(i, l, n);
             System.out.println(t1.toString());
+            scanner.close();  
             return t1;
             
         }
