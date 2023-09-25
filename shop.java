@@ -31,7 +31,7 @@ public class shop {
 
             for (int i = 0; i < 10; i++) {
                 int count = 0;
-                Integer r = rand.nextInt(0, 10) ;
+                Integer r = rand.nextInt(1, 10) ;
                 System.out.println(" число: " + r);
                 for (toy toy : list) {
                     if ((toy != null) && (r <= toy.losRate)) {
@@ -43,7 +43,7 @@ public class shop {
                 }
                     else {
                         count+=1;
-                        if (count>2) {
+                        if (count>list.size()-1) {
                             int idT = toy.getId();
                             String newIdYoy = String.valueOf(idT);
                             fileWriter.write(newIdYoy);
