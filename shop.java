@@ -1,7 +1,11 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Scanner;
 
 public class shop {
@@ -20,8 +24,43 @@ public class shop {
             list.offer(ttt.poll());
         }
         System.out.println("новая коллекция:" + list);
+        Random rand = new Random();
 
+
+        try (FileWriter fileWriter = new FileWriter(new File("log.txt"), true)) {
+
+            for (int i = 0; i < 10; i++) {
+                int count = 0;
+                Integer r = rand.nextInt(0, 10) ;
+                System.out.println(" число: " + r);
+                for (toy toy : list) {
+                    if ((toy != null) && (r <= toy.losRate)) {
+                        int idT = toy.getId();
+                        String newIdYoy = String.valueOf(idT);
+                        fileWriter.write(newIdYoy);
+                        System.out.println("id игрушки:" + idT);
+                        break;
+                }
+                    else {
+                        count+=1;
+                        if (count>2) {
+                            int idT = toy.getId();
+                            String newIdYoy = String.valueOf(idT);
+                            fileWriter.write(newIdYoy);
+                            System.out.println("id игрушки:" + idT);
+
+                        }
+
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println("Возникла ошибка , проверьте данные.");
+        }
     }
+
+    
     private static toy add () {
             Scanner scanner = new Scanner(System.in);
             System.out.println("введите name игрушки: ");
