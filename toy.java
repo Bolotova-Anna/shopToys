@@ -18,6 +18,9 @@ public class toy {
     public Integer getLosRate() {
         return losRate;
     }
+    public String getName() {
+        return name;
+    }
 
     public Integer getId() {
         return id;
